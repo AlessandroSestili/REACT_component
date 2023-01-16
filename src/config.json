@@ -1,0 +1,45 @@
+{
+  "components": {
+    "tableComponent": "enable",
+    "spinningSquareComponent": "enable",
+    "textComponent": "disable"
+  },
+  "svg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Quadrato.svg/640px-Quadrato.svg.png",
+  "table_data": [
+    {
+      "date": "01-01-2022",
+      "ticker": "AAPL",
+      "price": 132.45,
+      "volume": 5000000,
+      "market_cap": 7890000000
+    },
+    {
+      "date": "01-02-2022",
+      "ticker": "AAPL",
+      "price": 140.67,
+      "volume": 4500000,
+      "market_cap": 8230000000
+    },
+    {
+      "date": "01-03-2022",
+      "ticker": "AAPL",
+      "price": 150.12,
+      "volume": 4900000,
+      "market_cap": 8670000000
+    },
+    {
+      "date": "01-04-2022",
+      "ticker": "AAPL",
+      "price": 145.78,
+      "volume": 4300000,
+      "market_cap": 8350000000
+    },
+    {
+      "date": "01-05-2022",
+      "ticker": "AAPL",
+      "price": 155.98,
+      "volume": 5100000,
+      "market_cap": 8910000000
+    }
+  ]
+}
