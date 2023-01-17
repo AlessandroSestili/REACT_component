@@ -3,6 +3,11 @@
 const e = React.createElement;
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { makeStyles } from "@material-ui/core/styles";
+import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
+import { withStyles } from "@material-ui/core/styles";
+import { Link, BrowserRouter as Router } from "react-router-dom";
 
 class JSONDataFetcher extends React.Component {
   constructor(props) {
@@ -26,45 +31,15 @@ class JSONDataFetcher extends React.Component {
     if (data) {
       return (
         <div>
-          <LikeButton dataParentToChild={data} />
-          <MyTable dataParentToChild={data} />
+          <Router>
+            <MorningStarStyleAppBar />
+            {data.components.tableComponent && (<MyTable dataParentToChild={data} />)}
+          </Router>
         </div>
       );
     } else {
       return <div>Caricamento...</div>;
     }
-  }
-}
-
-class LikeButton extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      degree: 0,
-      data: this.props.dataParentToChild,
-    };
-  }
-
-  // componentDidMount è chiamato una volta che il componente è stato montato e pronto per essere utilizzato.
-  componentDidMount() {
-    setInterval(() => {
-      this.setState((prevState) => ({
-        degree: (prevState.degree + 1) % 360,
-      }));
-    }, 50); //Fa ruotare un'immagine di 360 gradi ogni 50 millesimi di secondo.
-  }
-
-  render() {
-    //Crea e visualizza l'interfaccia utente del componente.
-    const { data } = this.state;
-
-    const img = e("img", {
-      //Crea un nuovo elemento HTML utilizzando React e gli assegna proprietà specificate.
-      src: { data }.data.svg,
-      alt: "Spinning square",
-      style: { transform: `rotate(${this.state.degree}deg)`, width: "100px" },
-    });
-    return e("div", null, img);
   }
 }
 
@@ -92,7 +67,7 @@ class MyTable extends React.Component {
       border: "1px solid #ddd",
     };
     if (!this.state.data || this.state.data.table_data.length === 0) {
-      return <div>Loading...</div>;
+      return <div>Caricamento...</div>;
     }
     const keys = Object.keys(this.state.data.table_data[0]);
     return (
@@ -120,6 +95,76 @@ class MyTable extends React.Component {
       </table>
     );
   }
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    background: "#F5F5F5",
+    color: "#333",
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    textAlign: "center",
+  },
+  menuItem: {
+    marginRight: theme.spacing(2),
+    fontWeight: "bold",
+    color: "#333",
+    "&:hover": {
+      color: "#656565",
+    },
+  },
+}));
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    "&:hover": {
+      backgroundColor: "#F5F5F5",
+      color: "#656565",
+    },
+    "&:focus": {
+      backgroundColor: "#F5F5F5",
+      color: "#656565",
+    },
+  },
+}))(Link);
+
+export default function MorningStarStyleAppBar() {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            <img src="path/to/logo.png" alt="logo" />
+          </Typography>
+          <StyledMenuItem href="/menu-item-1" className={classes.menuItem}>
+            Home
+          </StyledMenuItem>
+          <StyledMenuItem
+            href="/menu-item-2"
+            className={classes.menuItem}
+          ></StyledMenuItem>
+          <StyledMenuItem href="/menu-item-3" className={classes.menuItem}>
+            Menu item 3
+          </StyledMenuItem>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
 
 const domContainer = document.querySelector("#App");

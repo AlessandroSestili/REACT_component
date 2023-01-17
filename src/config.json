@@ -1,8 +1,8 @@
 {
   "components": {
-    "tableComponent": "enable",
-    "spinningSquareComponent": "enable",
-    "textComponent": "disable"
+    "tableComponent": true,
+    "spinningSquareComponent": true,
+    "textComponent": true
   },
   "svg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Quadrato.svg/640px-Quadrato.svg.png",
   "table_data": [
